@@ -783,6 +783,22 @@ summary:focus-visible {
 .download-section .download-note {
   margin-top: 14px;
 }
+/* Placement of the Homebrew command under the download button; the block
+   itself reuses .run-demo and .terminal-command. */
+.download-brew-label {
+  margin-top: 26px;
+}
+.download-brew {
+  max-width: 460px;
+  margin: 10px auto 0;
+  text-align: left;
+}
+.download-brew .terminal-command {
+  padding-bottom: 20px;
+}
+.download-brew code {
+  overflow-wrap: anywhere;
+}
 .site-footer {
   border-top: 1px solid var(--line);
   display: flex;

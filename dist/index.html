@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1629" />
+    <title>grantd — Your keys. Your permission.</title>
+    <meta
+      name="description"
+      content="A local vault for API keys and tokens. Let AI coding agents run commands with your secrets, with approvals you control and an audit trail on your Mac."
+    />
+    <meta property="og:title" content="grantd — Your keys. Your permission." />
+    <meta
+      property="og:description"
+      content="Let your AI agent use your keys. Keep the keys to yourself. A local secrets broker for macOS."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://jmeh-sindikata.github.io/grantd-web/"
+    />
+    <meta
+      property="og:image"
+      content="https://jmeh-sindikata.github.io/grantd-web/assets/grantd-icon.png"
+    />
+    <link rel="canonical" href="https://jmeh-sindikata.github.io/grantd-web/" />
+    <link rel="icon" href="./assets/grantd-icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./fonts.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./site-config.js" defer></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell">
+      <header class="site-header wrap">
+        <a class="brand" href="#" aria-label="grantd home"
+          ><img
+            src="./assets/grantd-icon.svg"
+            width="39"
+            height="39"
+            alt=""
+          /><span>grantd</span></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#questions">Questions</a>
+          <a class="nav-download" href="#download"
+            >Get grantd <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </header>
+      <main id="main">
+        <section class="hero wrap" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span class="status-dot" aria-hidden="true"></span> A local vault
+              for AI coding agents
+            </p>
+            <h1 id="hero-title">
+              Your agent works.<br /><span
+                >Your secrets<br class="desktop-break" />
+                stay yours.</span
+              >
+            </h1>
+            <p class="hero-description">
+              Give your agent permission to use your API keys.<br
+                class="wide-break"
+              />
+              Without handing over the keys.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#download" data-download
+                ><svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4" /></svg
+                >Download for macOS</a
+              >
+              <a class="text-link" href="#how-it-works"
+                >See how it works <span aria-hidden="true">↘</span></a
+              >
+            </div>
+            <p class="download-note" data-download-note>
+              macOS 14+ <span aria-hidden="true">·</span> Download link coming
+              soon
+            </p>
+            <div class="hero-details">
+              <span>Local only</span><span>No account</span
+              ><span>Open source</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="visual-caption">
+              <span class="mono">A RUN, WITH GRANTD</span
+              ><span class="example-label">Interactive example</span>
+            </div>
+            <div
+              class="run-demo"
+              aria-label="Illustrated example of a grantd approval"
+            >
+              <div class="terminal-bar">
+                <div class="traffic-lights" aria-hidden="true">
+                  <i></i><i></i><i></i>
+                </div>
+                <span>your-project</span
+                ><span class="terminal-local"
+                  ><span aria-hidden="true">●</span> local</span
+                >
+              </div>
+              <div class="terminal-command">
+                <span class="terminal-prompt" aria-hidden="true">$</span
+                ><code
+                  >grantd run --secrets API_KEY \<br /><span
+                    class="command-indent"
+                    >-- ./deploy.sh</span
+                  ></code
+                >
+              </div>
+              <div class="flow-line" aria-hidden="true">
+                <span></span
+                ><svg viewBox="0 0 20 20">
+                  <path d="M10 2v14m-4-4 4 4 4-4" /></svg
+                ><span></span>
+              </div>
+              <div class="approval-card" id="approval-card">
+                <div class="approval-heading">
+                  <img
+                    src="./assets/grantd-icon.svg"
+                    width="37"
+                    height="37"
+                    alt=""
+                  />
+                  <div>
+                    <span class="approval-app">grantd</span
+                    ><span class="approval-subtitle"
+                      >This command needs your permission.</span
+                    >
+                  </div>
+                </div>
+                <dl class="request-details">
+                  <div>
+                    <dt>Command</dt>
+                    <dd><code>./deploy.sh</code></dd>
+                  </div>
+                  <div>
+                    <dt>Secret</dt>
+                    <dd>
+                      <code>API_KEY</code
+                      ><span class="value-hidden">value stays hidden</span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Project</dt>
+                    <dd><code>~/your-project</code></dd>
+                  </div>
+                </dl>
+                <div class="presence-line">
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path
+                      d="M8 13v-2a4 4 0 0 1 8 0v3m-11 0v-3a7 7 0 0 1 14 0v3c0 2-.4 4-1.2 6M9 19c1-1.8 1-4 1-7a2 2 0 0 1 4 0v3c0 2-.3 4-1 6M5 18c1-2 1-4 1-6M8 4a9 9 0 0 1 12 3"
+                    /></svg
+                  ><span>Approval is followed by Touch ID.</span>
+                </div>
+                <div class="approval-actions">
+                  <button
+                    type="button"
+                    class="deny-button"
+                    id="demo-deny"
+                    aria-label="Deny the example command"
+                  >
+                    Deny</button
+                  ><button
+                    type="button"
+                    class="allow-button"
+                    id="demo-allow"
+                    aria-label="Allow the example command once"
+                  >
+                    Allow once <span aria-hidden="true">↗</span>
+                  </button>
+                </div>
+              </div>
+              <div class="demo-result" id="demo-result" hidden>
+                <div class="result-heading">
+                  <span class="result-icon" id="result-icon" aria-hidden="true"
+                    >✓</span
+                  >
+                  <h2 id="result-title">Permission granted.</h2>
+                </div>
+                <p id="result-description">
+                  The command gets the secret.<br />The agent gets redacted
+                  output.
+                </p>
+                <div class="result-output">
+                  <code id="result-output">API_KEY=[REDACTED:API_KEY]</code
+                  ><span id="audit-outcome"
+                    ><span class="result-led" aria-hidden="true"></span>
+                    Decision recorded in the audit log</span
+                  >
+                </div>
+                <button class="replay-button" type="button" id="demo-reset">
+                  Try again <span aria-hidden="true">↻</span>
+                </button>
+              </div>
+              <div class="demo-footer">
+                <span class="tiny-lock" aria-hidden="true">●</span
+                ><span>No real commands, secrets, or authentication.</span>
+              </div>
+            </div>
+            <p class="visual-footnote">
+              The agent asks. You decide. grantd handles the secret.
+            </p>
+          </div>
+        </section>
+        <div class="compatibility wrap">
+          <span>Works with your coding workflow</span>
+          <div>
+            <span>Claude Code</span><span>Codex</span><span>Cursor</span
+            ><span class="mono">CLI + MCP</span>
+          </div>
+        </div>
+        <section class="principles wrap" aria-label="What grantd gives you">
+          <article>
+            <span class="section-index mono">01 / LOCAL</span>
+            <h2>Your Mac. Your vault.</h2>
+            <p>
+              API keys and tokens live in an encrypted vault on your machine. No
+              cloud sync, no account to create.
+            </p>
+          </article>
+          <article>
+            <span class="section-index mono">02 / CONTROL</span>
+            <h2>Permission, on your terms.</h2>
+            <p>
+              Review the command and approve with Touch ID. Allow a single run
+              or create a grant with a scope you choose.
+            </p>
+          </article>
+          <article>
+            <span class="section-index mono">03 / VISIBILITY</span>
+            <h2>A trail you can follow.</h2>
+            <p>
+              Keep a local record of requests, decisions, and results. Injected
+              secret values are redacted from command output.
+            </p>
+          </article>
+        </section>
+        <section
+          class="how-section wrap"
+          id="how-it-works"
+          aria-labelledby="how-title"
+        >
+          <div class="section-intro">
+            <p class="eyebrow">A small change to your workflow</p>
+            <h2 id="how-title">
+              Keep the context.<br /><span>Lose the exposure.</span>
+            </h2>
+            <p>
+              Think of grantd as the bouncer between your AI agent and your
+              secrets.
+            </p>
+          </div>
+          <ol class="steps">
+            <li>
+              <span class="step-number mono">01</span>
+              <div>
+                <h3>Put your keys in one place.</h3>
+                <p>
+                  Add your API keys and tokens to the local vault. Manage them
+                  from the menu-bar app, or use the CLI.
+                </p>
+                <span class="step-detail mono"
+                  >Store once. Reference by name.</span
+                >
+              </div>
+            </li>
+            <li>
+              <span class="step-number mono">02</span>
+              <div>
+                <h3>Connect your coding agent.</h3>
+                <p>
+                  Connect through MCP, or let your agent call the grantd CLI. It
+                  asks to run a command with named secrets.
+                </p>
+                <span class="step-detail mono"
+                  >No secret values in the agent’s configuration.</span
+                >
+              </div>
+            </li>
+            <li>
+              <span class="step-number mono">03</span>
+              <div>
+                <h3>Review. Approve. Keep building.</h3>
+                <p>
+                  See the command, project, and requested keys. After approval,
+                  grantd runs the command and returns redacted output.
+                </p>
+                <span class="step-detail mono"
+                  >Your approval. An audited result.</span
+                >
+              </div>
+            </li>
+          </ol>
+        </section>
+        <section
+          class="faq-section wrap"
+          id="questions"
+          aria-labelledby="faq-title"
+        >
+          <div class="section-intro">
+            <p class="eyebrow">Good questions.</p>
+            <h2 id="faq-title">
+              A little more<br /><span>under the hood.</span>
+            </h2>
+          </div>
+          <div class="faqs">
+            <details>
+              <summary>
+                Does the agent ever see the secret?<span aria-hidden="true"
+                  >+</span
+                >
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  The normal run flow passes the secret to the approved
+                  command’s environment, not to the agent. grantd replaces exact
+                  matches of injected values in stdout and stderr before
+                  returning that output.
+                </p>
+                <p>
+                  This is exact-match redaction: encoded or transformed values
+                  can get through. Always review the command you’re approving.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                Do I approve every command?<span aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  You can approve one run, allow matching requests for a limited
+                  time, or create a standing grant. Grants are scoped to a
+                  caller label, project directory, secret names, and command
+                  prefix. Matching requests can then run without a new prompt;
+                  every use is still audited.
+                </p>
+                <p>
+                  Creating a grant requires approval. Keep its scope narrow and
+                  its lifetime short.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                Which agents can I use it with?<span aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  grantd has an MCP server and a command-line interface. Claude
+                  Code has a dedicated connection flow in the app. Other coding
+                  agents, including Codex and Cursor, can integrate through MCP
+                  or call the CLI.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                Does grantd make any command safe?<span aria-hidden="true"
+                  >+</span
+                >
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  No. An approved command receives the secret and can send it
+                  elsewhere. grantd does not sandbox commands or restrict
+                  network access, and it cannot protect a compromised user
+                  account.
+                </p>
+                <p>
+                  The important boundary is your approval of the command and any
+                  grants you create.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                Which platforms does it support?<span aria-hidden="true"
+                  >+</span
+                >
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  The current app is for macOS 14 and later. It includes a
+                  menu-bar app, a local background service, a CLI, and an MCP
+                  server. Touch ID is used for approval, with macOS
+                  account-password fallback when needed.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>
+                Is it open source?<span aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Yes. grantd is licensed under Apache 2.0. It runs locally,
+                  with no cloud account or sync service required.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
+        <section
+          class="download-section wrap"
+          id="download"
+          aria-labelledby="download-title"
+        >
+          <div class="download-symbol">
+            <img src="./assets/grantd-icon.svg" width="85" height="85" alt="" />
+          </div>
+          <p class="eyebrow">Less exposure. More peace of mind.</p>
+          <h2 id="download-title">
+            Your keys.<br /><span>Your permission.</span>
+          </h2>
+          <p>
+            A local home for your secrets.<br />A clear boundary for your agent.
+          </p>
+          <a class="button button-primary" href="#download" data-download
+            ><svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4" /></svg
+            >Download for macOS</a
+          >
+          <p class="download-note" data-download-note>
+            macOS 14+ <span aria-hidden="true">·</span> Download link coming
+            soon
+          </p>
+        </section>
+      </main>
+      <footer class="site-footer wrap">
+        <a class="brand" href="#" aria-label="grantd home"
+          ><img
+            src="./assets/grantd-icon.svg"
+            width="28"
+            height="28"
+            alt=""
+          /><span>grantd</span></a
+        >
+        <p>A little boundary. A better workflow.</p>
+        <span class="footer-license">Local by design. Apache 2.0.</span>
+      </footer>
+    </div>
+    <dialog
+      id="download-dialog"
+      aria-labelledby="download-dialog-title"
+      aria-describedby="download-dialog-description"
+    >
+      <form method="dialog">
+        <img src="./assets/grantd-icon.svg" width="54" height="54" alt="" />
+        <h2 id="download-dialog-title">The download is on its way.</h2>
+        <p id="download-dialog-description">
+          The macOS download link isn’t available yet. Check back here soon.
+        </p>
+        <button class="button button-primary" type="submit">Got it</button>
+      </form>
+    </dialog>
+    <div class="sr-only" aria-live="polite" id="demo-announcement"></div>
+  </body>
+</html>

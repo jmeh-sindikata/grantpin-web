@@ -1,0 +1,10 @@
+{
+  "name": "grantd-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "check": "node --check dist/script.js && node --check dist/site-config.js && node --check server.mjs"
+  }
+}

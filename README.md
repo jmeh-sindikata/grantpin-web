@@ -1,0 +1,38 @@
+# grantd landing page
+
+Website: https://jmeh-sindikata.github.io/grantd-web/
+
+Repository: https://github.com/jmeh-sindikata/grantd-web
+
+Buildless, responsive HTML/CSS/JavaScript using the selected grantd icon and self-hosted IBM Plex Sans. IBM Plex Mono is used only for commands and small technical labels. Font licenses are in `dist/fonts/OFL.txt`.
+
+## Preview locally
+
+```sh
+npm run dev
+```
+
+Open the printed local URL. No package installation or build is needed. The deployable page and all of its assets are in `dist/`.
+
+## Set the download URL
+
+Edit `dist/site-config.js`:
+
+```js
+window.GRANTD_CONFIG = {
+  downloadUrl: 'https://your-release-url.example/grantd.zip',
+  downloadNote: 'macOS 14+ · Your release version'
+};
+```
+
+Both download buttons pick up that URL. While it is empty, the page clearly states that the link is coming soon and opens an explanatory dialog. No private app archive is included.
+
+The approval interaction is an explicitly labelled illustration: it does not run commands, read credentials, or request authentication. No analytics, remote scripts, external fonts, accounts, or data collection are included.
+
+Product copy was based on a read-only inspection of the Secrets project's documentation and SwiftUI source. The source app project was not changed.
+
+## GitHub Pages
+
+The GitHub Actions workflow in `.github/workflows/pages.yml` checks the JavaScript and deploys only `dist/` on pushes to `main`. Configure the repository's Pages source as **GitHub Actions**. It can also be run manually from the Actions tab.
+
+All asset paths are relative, so the page works under a repository path on GitHub Pages. No app binaries or application source code are bundled in the website.

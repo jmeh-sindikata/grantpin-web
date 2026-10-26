@@ -1,6 +1,6 @@
 # grantpin landing page
 
-Website: https://jmeh-sindikata.github.io/grantpin-web/
+Website: https://grantpin.dev/
 
 Repository: https://github.com/jmeh-sindikata/grantpin-web
 

@@ -30,6 +30,7 @@
   const result = document.getElementById("demo-result");
   const reset = document.getElementById("demo-reset");
   const allow = document.getElementById("demo-allow");
+  const allowHour = document.getElementById("demo-allow-hour");
   const deny = document.getElementById("demo-deny");
   const announcement = document.getElementById("demo-announcement");
   function choose(allowed) {
@@ -57,12 +58,13 @@
     reset.focus({ preventScroll: true });
   }
   allow.addEventListener("click", () => choose(true));
+  allowHour.addEventListener("click", () => choose(true));
   deny.addEventListener("click", () => choose(false));
   reset.addEventListener("click", () => {
     result.hidden = true;
     request.hidden = false;
     announcement.textContent =
-      "Example reset. Review the command and choose Allow once or Deny.";
+      "Example reset. Review the command and choose Allow once, Allow for 1h, or Deny.";
     allow.focus({ preventScroll: true });
   });
 })();

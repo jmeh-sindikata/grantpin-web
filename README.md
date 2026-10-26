@@ -20,12 +20,12 @@ Edit `dist/site-config.js`:
 
 ```js
 window.GRANTD_CONFIG = {
-  downloadUrl: 'https://your-release-url.example/grantd.zip',
-  downloadNote: 'macOS 14+ · Your release version'
+  downloadUrl: 'https://github.com/jmeh-sindikata/grantd/releases/latest',
+  downloadNote: 'macOS 14+ · Latest release on GitHub'
 };
 ```
 
-Both download buttons pick up that URL. While it is empty, the page clearly states that the link is coming soon and opens an explanatory dialog. No private app archive is included.
+Both download buttons point to the latest GitHub release page, including when JavaScript is unavailable. The runtime configuration can override both links. If clearing the configuration for a future placeholder, also update the HTML fallback links and notes. No app archive is included in the website.
 
 The approval interaction is an explicitly labelled illustration: it does not run commands, read credentials, or request authentication. No analytics, remote scripts, external fonts, accounts, or data collection are included.
 

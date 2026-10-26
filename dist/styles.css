@@ -833,6 +833,11 @@ dialog p {
 dialog .button {
   width: 100%;
 }
+@media (min-width: 1200px) {
+  .wrap {
+    padding-inline: 0;
+  }
+}
 @media (min-width: 1280px) {
   .hero {
     gap: 64px;

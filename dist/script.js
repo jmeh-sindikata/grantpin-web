@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  const config = window.GRANTD_CONFIG || {};
+  const config = window.GRANTPIN_CONFIG || {};
   const downloadDialog = document.getElementById("download-dialog");
   document.querySelectorAll("[data-download]").forEach((link) => {
     if (config.downloadUrl) {

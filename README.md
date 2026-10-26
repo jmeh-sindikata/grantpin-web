@@ -1,10 +1,10 @@
-# grantd landing page
+# grantpin landing page
 
-Website: https://jmeh-sindikata.github.io/grantd-web/
+Website: https://jmeh-sindikata.github.io/grantpin-web/
 
-Repository: https://github.com/jmeh-sindikata/grantd-web
+Repository: https://github.com/jmeh-sindikata/grantpin-web
 
-Buildless, responsive HTML/CSS/JavaScript using the selected grantd icon and self-hosted IBM Plex Sans. IBM Plex Mono is used only for commands and small technical labels. Font licenses are in `dist/fonts/OFL.txt`.
+Buildless, responsive HTML/CSS/JavaScript using the selected grantpin icon and self-hosted IBM Plex Sans. IBM Plex Mono is used only for commands and small technical labels. Font licenses are in `dist/fonts/OFL.txt`.
 
 ## Preview locally
 
@@ -19,8 +19,8 @@ Open the printed local URL. No package installation or build is needed. The depl
 Edit `dist/site-config.js`:
 
 ```js
-window.GRANTD_CONFIG = {
-  downloadUrl: 'https://github.com/jmeh-sindikata/grantd/releases/latest',
+window.GRANTPIN_CONFIG = {
+  downloadUrl: 'https://github.com/jmeh-sindikata/grantpin/releases/latest',
   downloadNote: 'macOS 14+ · Latest release on GitHub'
 };
 ```

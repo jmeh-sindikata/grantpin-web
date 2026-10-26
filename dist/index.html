@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1629" />
-    <title>grantd — Your keys. Your permission.</title>
+    <title>grantpin — Your keys. Your permission.</title>
     <meta
       name="description"
       content="A local vault for API keys and tokens. Let AI coding agents run commands with your secrets, with approvals you control and an audit trail on your Mac."
     />
-    <meta property="og:title" content="grantd — Your keys. Your permission." />
+    <meta property="og:title" content="grantpin — Your keys. Your permission." />
     <meta
       property="og:description"
       content="Let your AI agent use your keys. Keep the keys to yourself. A local secrets broker for macOS."
@@ -17,14 +17,14 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
-      content="https://jmeh-sindikata.github.io/grantd-web/"
+      content="https://jmeh-sindikata.github.io/grantpin-web/"
     />
     <meta
       property="og:image"
-      content="https://jmeh-sindikata.github.io/grantd-web/assets/grantd-icon.png"
+      content="https://jmeh-sindikata.github.io/grantpin-web/assets/grantpin-icon.png"
     />
-    <link rel="canonical" href="https://jmeh-sindikata.github.io/grantd-web/" />
-    <link rel="icon" href="./assets/grantd-icon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://jmeh-sindikata.github.io/grantpin-web/" />
+    <link rel="icon" href="./assets/grantpin-icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./fonts.css" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./site-config.js" defer></script>
@@ -34,19 +34,19 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="page-shell">
       <header class="site-header wrap">
-        <a class="brand" href="#" aria-label="grantd home"
+        <a class="brand" href="#" aria-label="grantpin home"
           ><img
-            src="./assets/grantd-icon.svg"
+            src="./assets/grantpin-icon.svg"
             width="39"
             height="39"
             alt=""
-          /><span>grantd</span></a
+          /><span>grantpin</span></a
         >
         <nav aria-label="Main navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#questions">Questions</a>
           <a class="nav-download" href="#download"
-            >Get grantd <span aria-hidden="true">↗</span></a
+            >Get grantpin <span aria-hidden="true">↗</span></a
           >
         </nav>
       </header>
@@ -72,7 +72,7 @@
             <div class="hero-actions">
               <a
                 class="button button-primary"
-                href="https://github.com/jmeh-sindikata/grantd/releases/latest"
+                href="https://github.com/jmeh-sindikata/grantpin/releases/latest"
                 data-download
                 ><svg aria-hidden="true" viewBox="0 0 24 24">
                   <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4" /></svg
@@ -93,12 +93,12 @@
           </div>
           <div class="hero-visual">
             <div class="visual-caption">
-              <span class="mono">A RUN, WITH GRANTD</span
+              <span class="mono">A RUN, WITH GRANTPIN</span
               ><span class="example-label">Interactive example</span>
             </div>
             <div
               class="run-demo"
-              aria-label="Illustrated example of a grantd approval"
+              aria-label="Illustrated example of a grantpin approval"
             >
               <div class="terminal-bar">
                 <div class="traffic-lights" aria-hidden="true">
@@ -112,7 +112,7 @@
               <div class="terminal-command">
                 <span class="terminal-prompt" aria-hidden="true">$</span
                 ><code
-                  >grantd run --secrets API_KEY \<br /><span
+                  >grantpin run --secrets API_KEY \<br /><span
                     class="command-indent"
                     >-- ./deploy.sh</span
                   ></code
@@ -127,13 +127,13 @@
               <div class="approval-card" id="approval-card">
                 <div class="approval-heading">
                   <img
-                    src="./assets/grantd-icon.svg"
+                    src="./assets/grantpin-icon.svg"
                     width="37"
                     height="37"
                     alt=""
                   />
                   <div>
-                    <span class="approval-app">grantd</span
+                    <span class="approval-app">grantpin</span
                     ><span class="approval-subtitle"
                       >This command needs your permission.</span
                     >
@@ -209,7 +209,7 @@
               </div>
             </div>
             <p class="visual-footnote">
-              The agent asks. You decide. grantd handles the secret.
+              The agent asks. You decide. grantpin handles the secret.
             </p>
           </div>
         </section>
@@ -220,7 +220,7 @@
             ><span class="mono">CLI + MCP</span>
           </div>
         </div>
-        <section class="principles wrap" aria-label="What grantd gives you">
+        <section class="principles wrap" aria-label="What grantpin gives you">
           <article>
             <span class="section-index mono">01 / LOCAL</span>
             <h2>Your Mac. Your vault.</h2>
@@ -257,7 +257,7 @@
               Keep the context.<br /><span>Lose the exposure.</span>
             </h2>
             <p>
-              Think of grantd as the bouncer between your AI agent and your
+              Think of grantpin as the bouncer between your AI agent and your
               secrets.
             </p>
           </div>
@@ -280,7 +280,7 @@
               <div>
                 <h3>Connect your coding agent.</h3>
                 <p>
-                  Connect through MCP, or let your agent call the grantd CLI. It
+                  Connect through MCP, or let your agent call the grantpin CLI. It
                   asks to run a command with named secrets.
                 </p>
                 <span class="step-detail mono"
@@ -294,7 +294,7 @@
                 <h3>Review. Approve. Keep building.</h3>
                 <p>
                   See the command, project, and requested keys. After approval,
-                  grantd runs the command and returns redacted output.
+                  grantpin runs the command and returns redacted output.
                 </p>
                 <span class="step-detail mono"
                   >Your approval. An audited result.</span
@@ -324,7 +324,7 @@
               <div class="faq-answer">
                 <p>
                   The normal run flow passes the secret to the approved
-                  command’s environment, not to the agent. grantd replaces exact
+                  command’s environment, not to the agent. grantpin replaces exact
                   matches of injected values in stdout and stderr before
                   returning that output.
                 </p>
@@ -358,7 +358,7 @@
               </summary>
               <div class="faq-answer">
                 <p>
-                  grantd has an MCP server and a command-line interface. Claude
+                  grantpin has an MCP server and a command-line interface. Claude
                   Code has a dedicated connection flow in the app. Other coding
                   agents, including Codex and Cursor, can integrate through MCP
                   or call the CLI.
@@ -367,14 +367,14 @@
             </details>
             <details>
               <summary>
-                Does grantd make any command safe?<span aria-hidden="true"
+                Does grantpin make any command safe?<span aria-hidden="true"
                   >+</span
                 >
               </summary>
               <div class="faq-answer">
                 <p>
                   No. An approved command receives the secret and can send it
-                  elsewhere. grantd does not sandbox commands or restrict
+                  elsewhere. grantpin does not sandbox commands or restrict
                   network access, and it cannot protect a compromised user
                   account.
                 </p>
@@ -405,7 +405,7 @@
               </summary>
               <div class="faq-answer">
                 <p>
-                  Yes. grantd is licensed under Apache 2.0. It runs locally,
+                  Yes. grantpin is licensed under Apache 2.0. It runs locally,
                   with no cloud account or sync service required.
                 </p>
               </div>
@@ -418,7 +418,7 @@
           aria-labelledby="download-title"
         >
           <div class="download-symbol">
-            <img src="./assets/grantd-icon.svg" width="85" height="85" alt="" />
+            <img src="./assets/grantpin-icon.svg" width="85" height="85" alt="" />
           </div>
           <p class="eyebrow">Less exposure. More peace of mind.</p>
           <h2 id="download-title">
@@ -429,7 +429,7 @@
           </p>
           <a
             class="button button-primary"
-            href="https://github.com/jmeh-sindikata/grantd/releases/latest"
+            href="https://github.com/jmeh-sindikata/grantpin/releases/latest"
             data-download
             ><svg aria-hidden="true" viewBox="0 0 24 24">
               <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4" /></svg
@@ -441,13 +441,13 @@
         </section>
       </main>
       <footer class="site-footer wrap">
-        <a class="brand" href="#" aria-label="grantd home"
+        <a class="brand" href="#" aria-label="grantpin home"
           ><img
-            src="./assets/grantd-icon.svg"
+            src="./assets/grantpin-icon.svg"
             width="28"
             height="28"
             alt=""
-          /><span>grantd</span></a
+          /><span>grantpin</span></a
         >
         <p>A little boundary. A better workflow.</p>
         <span class="footer-license">Local by design. Apache 2.0.</span>
@@ -459,7 +459,7 @@
       aria-describedby="download-dialog-description"
     >
       <form method="dialog">
-        <img src="./assets/grantd-icon.svg" width="54" height="54" alt="" />
+        <img src="./assets/grantpin-icon.svg" width="54" height="54" alt="" />
         <h2 id="download-dialog-title">The download is on its way.</h2>
         <p id="download-dialog-description">
           The macOS download link isn’t available yet. Check back here soon.

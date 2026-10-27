@@ -249,6 +249,12 @@ macOS only. `install` writes `~/Library/LaunchAgents/dev.grantpin.daemon.plist` 
 
 `install` refuses a binary in a temporary directory.
 
+:::note[Needs v0.2.4 or newer]
+`service install` also leaves an empty marker file, `service.wanted`, in the data folder (next to `vault.db`), written only after the job was installed and loaded. It records that you want the service, so the app can tell "installed and went missing" from "never set up". `service uninstall` removes it, also when the job was already gone. The marker alone does not start or restore anything.
+
+`service status` prints a last line, `wanted:    yes` or `wanted:    no`, whether the service is installed or not. The lines before it and the exit status (3 when not installed) are unchanged.
+:::
+
 ## grantpin mcp
 
 ```sh
@@ -306,5 +312,6 @@ Give exactly one of `--fallback` and `--hardware`. Exit: 0 deleted, 3 there was 
 | `~/Library/Application Support/grantpin/vault.db` | The vault: secrets, grants and the audit log. Mode 0600. |
 | `~/Library/Application Support/grantpin/grantpin.sock` | The daemon's socket. Mode 0600, same user only. |
 | `~/Library/LaunchAgents/dev.grantpin.daemon.plist` | The background service definition. |
+| `~/Library/Application Support/grantpin/service.wanted` | Empty marker that `service install` leaves (v0.2.4 or newer). |
 | `~/Library/Logs/grantpin/daemon.out.log`, `daemon.err.log` | Service logs. They hold operation names, callers, folders and outcomes, not command lines or values. |
 | `<project>/.grantpin.yml` | A project's [policy](/docs/policy/). |

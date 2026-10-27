@@ -11,7 +11,7 @@ Open grantpin and go to **Settings**, then **Uninstall**. The sheet lists what i
 
 | Option | What it does |
 |---|---|
-| Stop and remove the background service | Removes the launchd job (`dev.grantpin.daemon`). On by default. |
+| Stop and remove the background service | Removes the launchd job (`dev.grantpin.daemon`) and the `service.wanted` marker, so grantpin does not bring the service back. On by default. |
 | Delete my vault | Deletes all secrets, grants and the audit log. You must type `delete` to confirm. It always stops the service first. |
 | Delete logs | Deletes the daemon logs. |
 | Remove the grantpin command from `~/.local/bin` | Offered when `~/.local/bin/grantpin` is a link into this app (see [Install](/docs/install/#install-the-command-from-the-app-dmg)). Needs v0.2.2 or newer. Only the link is removed, never a file or a link that points elsewhere. |
@@ -31,11 +31,19 @@ If you turned on **Start grantpin when I log in**, the app's Uninstall turns it 
 
 ## With Homebrew
 
+Remove the background service first, with **Settings > Uninstall** in the app or:
+
+```sh
+grantpin service uninstall
+```
+
+Then:
+
 ```sh
 brew uninstall --cask grantpin
 ```
 
-This stops the background job, quits the app and removes `grantpin.app` and the linked `grantpin` command. It **keeps** your vault and everything else in your home folder.
+Plain `brew uninstall` quits the app and removes `grantpin.app` and the linked `grantpin` command. It does **not** remove the background service, which is why you remove it first (the cask's own notes say the same). It also **keeps** your vault and everything else in your home folder.
 
 To remove those too:
 
@@ -43,9 +51,9 @@ To remove those too:
 brew uninstall --zap --cask grantpin
 ```
 
-`--zap` also deletes:
+`--zap` also removes the background service, and deletes:
 
-- `~/Library/Application Support/grantpin` (**your vault, with all your secrets, grants and audit log**)
+- `~/Library/Application Support/grantpin` (**your vault, with all your secrets, grants and audit log**, and the `service.wanted` marker)
 - `~/Library/LaunchAgents/dev.grantpin.daemon.plist`
 - `~/Library/Logs/grantpin`
 - `~/Library/Preferences/dev.grantpin.app.plist`
@@ -60,7 +68,7 @@ For a from-source build, or to do it by hand:
 grantpin service uninstall
 ```
 
-That stops and removes the background service. To delete the key material (the vault can never be opened again), pick the one that matches your vault:
+That stops and removes the background service, and removes the `service.wanted` marker in the data folder (also when the job was already gone), so grantpin does not bring the service back. To delete the key material (the vault can never be opened again), pick the one that matches your vault:
 
 ```sh
 grantpin keystore delete --hardware --yes
@@ -82,7 +90,7 @@ Finally remove the app (`/Applications/grantpin.app`) and run `claude mcp remove
 |---|---|
 | The app, `/Applications/grantpin.app` | Trash, or `brew uninstall --cask grantpin`. |
 | The `~/.local/bin/grantpin` link (DMG, v0.2.2 or newer) | App Uninstall (command line option), or `rm ~/.local/bin/grantpin`. |
-| The background service | App Uninstall, `grantpin service uninstall`, or `brew uninstall`. |
+| The background service and its `service.wanted` marker | App Uninstall or `grantpin service uninstall`. Plain `brew uninstall` leaves the service in place. `brew uninstall --zap` removes it (and the whole data folder). |
 | The vault, `~/Library/Application Support/grantpin` | App Uninstall ("Delete my vault"), `brew uninstall --zap`, or deleting the folder. |
 | Logs, `~/Library/Logs/grantpin` | App Uninstall ("Delete logs"), `--zap`, or deleting the folder. |
 | The vault key (Secure Enclave key or Keychain item) | App Uninstall (key option) or `grantpin keystore delete`. Not removed by `brew --zap`. |

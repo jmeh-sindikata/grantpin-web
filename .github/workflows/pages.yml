@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - "dist/**"
+      - "docs-site/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -32,13 +36,22 @@ jobs:
         run: |
           node --check dist/script.js
           node --check dist/site-config.js
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build landing page and docs
+        run: npm run build:site
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Upload static page
+      - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

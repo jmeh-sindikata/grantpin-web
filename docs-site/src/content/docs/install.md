@@ -69,10 +69,13 @@ Automatic restore and the `service.wanted` marker were added in v0.2.4.
 
 Sometimes the launchd job disappears without you removing it. A package manager can delete it when it upgrades an older grantpin (see [Updating](#updating)). grantpin can tell this apart from "never set up", because installing the service leaves a small marker file, `service.wanted`, in the data folder (`~/Library/Application Support/grantpin`).
 
-- If the marker exists and the job is gone, the app brings the service back by itself after about 10 seconds, and shows "grantpin restored its background service." for a while.
-- It tries once per app launch. If that fails, or if you never installed the service, grantpin opens a small window asking you to press **Start**.
+- If the marker exists and the job is gone, the app brings the service back by itself after about 10 seconds, the same way **Start** does. It does this only when the vault exists, the app runs from the Applications folder, the Welcome window is finished and the app is not in development mode.
+- It counts as restored only once the daemon answers, which it has up to 10 seconds to do after the service is started. From then on the popover shows "grantpin restored its background service." for ten minutes, or until the service stops again, and **Settings > General** shows when it was restored.
+- It tries once per app launch. If that fails, if the daemon does not answer in time, if you never installed the service, or if the service is installed but stopped or not answering, grantpin opens a small window, **grantpin background service**, with **Start**, **Repair** or **Restart**.
+- While the service is being changed some other way (**Start** in the popover, an action in Settings, **Install Service** in the Welcome window, or an open Uninstall sheet), the app decides nothing. It looks again when that action ends.
+- Once that window has opened, grantpin does not restore the service silently until the daemon has been answering for a minute. If the service stops again right after a restore, even within that minute, the window asks.
 - It never installs the service silently on a first run. First-run setup is the Welcome window, where you press **Install Service** yourself.
-- If you remove the service on purpose, with **Settings > Uninstall** or `grantpin service uninstall`, the marker is removed too, so the service stays removed.
+- If you remove the service on purpose, with **Settings > Uninstall**, by turning off **Keep grantpin running in the background** in **Settings > General**, or with `grantpin service uninstall`, the marker is removed too, so the service stays removed.
 
 A service installed by an older version has no marker yet. After upgrading from such a version the app asks you to press **Start**, and that writes the marker.
 

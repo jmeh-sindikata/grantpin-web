@@ -1363,3 +1363,27 @@ dialog .button {
     animation: none !important;
   }
 }
+
+/* Phone tap targets: bigger hit areas without changing how anything looks
+   (the extra padding is cancelled by an equal negative margin). */
+@media (max-width: 760px) {
+  .site-header nav > a:not(.nav-download),
+  .footer-link,
+  .hero-actions .text-link {
+    padding: 14px 8px;
+    margin: -14px -8px;
+  }
+  .site-header .brand,
+  .site-footer .brand {
+    padding-block: 7px;
+    margin-block: -7px;
+  }
+}
+@media (max-width: 480px) {
+  .nav-download {
+    padding: 12px 10px;
+  }
+  .approval-actions button {
+    min-height: 40px;
+  }
+}

@@ -1,0 +1,35 @@
+---
+title: grantpin documentation
+description: Documentation for grantpin, a local secrets broker for AI coding agents on macOS.
+template: splash
+hero:
+  tagline: A local secrets broker for AI coding agents. Your agent can use a secret without ever receiving it.
+  actions:
+    - text: Install
+      link: /docs/install/
+      icon: right-arrow
+    - text: How it works
+      link: /docs/introduction/
+      variant: minimal
+---
+
+import { Aside, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+<Aside type="note" title="Status">
+  v0.2, macOS only, early software. The CLI, the background daemon and the menu-bar app work.
+  Linux and Windows are planned, not promised. Expect rough edges and read the
+  [Security model](/docs/security/) before you trust it with anything you care about.
+</Aside>
+
+grantpin keeps your API keys and database URLs in an encrypted vault on your Mac. An agent such as Claude Code asks to run a command with named secrets. You see the exact command, confirm with Touch ID, and the command runs with the secrets in its environment. The agent only gets the output, with every secret value replaced by `[REDACTED:NAME]`.
+
+No cloud, no account, no analytics. Apache-2.0.
+
+<CardGrid>
+  <LinkCard title="Introduction" description="What grantpin is and how one run works." href="/docs/introduction/" />
+  <LinkCard title="Install" description="DMG, Homebrew or build from source." href="/docs/install/" />
+  <LinkCard title="Quick start" description="From an empty vault to a first approved run." href="/docs/quick-start/" />
+  <LinkCard title="Claude Code and MCP" description="Connect an agent and see what it sees." href="/docs/claude-code/" />
+  <LinkCard title="CLI reference" description="Every command, flag and exit code." href="/docs/cli/" />
+  <LinkCard title="Security model" description="What it protects against, and what it does not." href="/docs/security/" />
+</CardGrid>

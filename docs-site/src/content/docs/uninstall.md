@@ -1,0 +1,88 @@
+---
+title: Uninstall
+description: How to remove grantpin, what each method removes, and what it leaves behind.
+---
+
+Decide first whether you want to keep your secrets. **Deleting the vault, or the key that protects it, is permanent.** grantpin keeps no copy.
+
+## From the app (recommended)
+
+Open grantpin and go to **Settings**, then **Uninstall**. The sheet lists what it can remove:
+
+| Option | What it does |
+|---|---|
+| Stop and remove the background service | Removes the launchd job (`dev.grantpin.daemon`). On by default. |
+| Delete my vault | Deletes all secrets, grants and the audit log. You must type `delete` to confirm. It always stops the service first. |
+| Delete logs | Deletes the daemon logs. |
+| Delete the Keychain item / Delete the hardware key | Offered only for the matching vault type. Deleting the key makes the vault permanently unreadable, even if you keep the vault file. |
+
+When it finishes, the sheet lists what stays. Then:
+
+1. Disconnect Claude Code:
+
+   ```sh
+   claude mcp remove grantpin
+   ```
+
+2. Drag **grantpin** from Applications to the Trash.
+
+If you turned on **Start grantpin when I log in**, the app's Uninstall turns it off. If you remove the app another way, turn it off in grantpin's Settings first.
+
+## With Homebrew
+
+```sh
+brew uninstall --cask grantpin
+```
+
+This stops the background job, quits the app and removes `grantpin.app` and the linked `grantpin` command. It **keeps** your vault and everything else in your home folder.
+
+To remove those too:
+
+```sh
+brew uninstall --zap --cask grantpin
+```
+
+`--zap` also deletes:
+
+- `~/Library/Application Support/grantpin` (**your vault, with all your secrets, grants and audit log**)
+- `~/Library/LaunchAgents/dev.grantpin.daemon.plist`
+- `~/Library/Logs/grantpin`
+- `~/Library/Preferences/dev.grantpin.app.plist`
+
+It does **not** remove the vault's key from the Keychain. That is removed only by the app's Uninstall (tick the key option) or by `grantpin keystore delete`. The key is useless without the vault file, but you may want it gone. Run the key step *before* you zap if you want it removed, because afterwards the app is gone.
+
+## From the command line
+
+For a from-source build, or to do it by hand:
+
+```sh
+grantpin service uninstall
+```
+
+That stops and removes the background service. To delete the key material (the vault can never be opened again), pick the one that matches your vault:
+
+```sh
+grantpin keystore delete --hardware --yes
+grantpin keystore delete --fallback --yes
+```
+
+Use `--hardware` for a Secure Enclave vault and `--fallback` for one created with `--keychain-fallback`. The command refuses while a daemon is still answering, so stop the service first. Then delete the data folder:
+
+```sh
+rm -r ~/Library/Application\ Support/grantpin
+rm -r ~/Library/Logs/grantpin
+```
+
+Finally remove the app (`/Applications/grantpin.app`) and run `claude mcp remove grantpin`.
+
+## What stays, and where
+
+| Item | Removed by |
+|---|---|
+| The app, `/Applications/grantpin.app` | Trash, or `brew uninstall --cask grantpin`. |
+| The background service | App Uninstall, `grantpin service uninstall`, or `brew uninstall`. |
+| The vault, `~/Library/Application Support/grantpin` | App Uninstall ("Delete my vault"), `brew uninstall --zap`, or deleting the folder. |
+| Logs, `~/Library/Logs/grantpin` | App Uninstall ("Delete logs"), `--zap`, or deleting the folder. |
+| The vault key (Secure Enclave key or Keychain item) | App Uninstall (key option) or `grantpin keystore delete`. Not removed by `brew --zap`. |
+| The Claude Code connection | `claude mcp remove grantpin`. |
+| `.grantpin.yml` files in your projects | You. They are ordinary files in your repositories. |

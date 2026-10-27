@@ -25,18 +25,56 @@ That one command is three parts: `jmeh-sindikata/grantpin` is the *tap* (the Git
 
 This is a personal tap. grantpin is not in the official homebrew-cask yet.
 
-Then open grantpin from Applications once to finish setup (below).
+Then open grantpin from Applications once to finish setup (below). Upgrades with Homebrew keep the background service. See [Updating](#updating) for the exception.
 
 ## First launch
 
 On first launch the Welcome window walks you through the setup:
 
-1. **Install Service.** grantpin needs a small background service (a per-user launchd job named `dev.grantpin.daemon`) so agents can reach it. macOS may tell you a background item was added. That is this.
+1. **Install Service.** grantpin needs a small background service (a per-user launchd job named `dev.grantpin.daemon`) so agents can reach it. macOS may tell you a background item was added. That is this (see [The background service](#the-background-service)).
 2. **Create Vault.** This creates your encrypted vault and a key for it. On a Mac with a Secure Enclave the key lives there and cannot be copied off the machine. If your Mac cannot create a hardware key (a virtual machine, for example), the app offers **Use Weaker Protection**, which keeps the key in your Keychain instead. Read [Security model](/docs/security/) before choosing that.
 3. **First secret.** Add one, or import a `.env` file.
 4. **Connect Claude Code.** The window shows the command to run. See [Claude Code and MCP](/docs/claude-code/).
 
 Your vault is stored in `~/Library/Application Support/grantpin`.
+
+## The background service
+
+grantpin keeps one small process running, the *daemon*. It shows the approval dialogs, checks policy, runs your commands and writes the audit log. Agents talk to it, so it has to be running whenever an agent asks for a secret.
+
+The service is a per-user launchd job named `dev.grantpin.daemon`. It is never root. It starts when you log in to your Mac (not at boot, because the prompts need your desktop session), and launchd restarts it if it exits with an error. Its logs are in `~/Library/Logs/grantpin/`.
+
+### The macOS "background item" notice
+
+When the service is installed, macOS shows a notice that "S.A.P. SH.P.K." added a background item. That name is the developer name from grantpin's signing certificate, and the item is grantpin's service. You can switch it off any time in **System Settings > General > Login Items & Extensions**. Without it, agents cannot reach grantpin.
+
+### The menu-bar icon
+
+The menu-bar icon shows what the service is doing. Hover over it to see the same text as a tooltip.
+
+| Icon | Meaning | Tooltip |
+|---|---|---|
+| Plain | grantpin is running and the vault is open. | `grantpin` |
+| Dimmed, no dot | The vault is locked (the Secure Enclave key cannot be used while your Mac is locked), or grantpin is still checking. grantpin keeps trying. | `grantpin: vault locked`, `grantpin: checking` |
+| Dimmed, **red** dot | The background service is not running. Open the popover and press **Start** (or **Restart**). | `grantpin: not running` |
+| **Orange** dot | There is no vault yet, or some grants failed verification. Nothing is down. | `grantpin: no vault yet`, `grantpin: grants failed verification` |
+
+A red dot means no agent can use grantpin until you act. See [Troubleshooting](/docs/troubleshooting/#the-background-service-and-the-app).
+
+### Automatic restore
+
+:::note[Needs v0.2.4 or newer]
+Automatic restore and the `service.wanted` marker were added in v0.2.4.
+:::
+
+Sometimes the launchd job disappears without you removing it. A package manager can delete it when it upgrades an older grantpin (see [Updating](#updating)). grantpin can tell this apart from "never set up", because installing the service leaves a small marker file, `service.wanted`, in the data folder (`~/Library/Application Support/grantpin`).
+
+- If the marker exists and the job is gone, the app brings the service back by itself after about 10 seconds, and shows "grantpin restored its background service." for a while.
+- It tries once per app launch. If that fails, or if you never installed the service, grantpin opens a small window asking you to press **Start**.
+- It never installs the service silently on a first run. First-run setup is the Welcome window, where you press **Install Service** yourself.
+- If you remove the service on purpose, with **Settings > Uninstall** or `grantpin service uninstall`, the marker is removed too, so the service stays removed.
+
+A service installed by an older version has no marker yet. After upgrading from such a version the app asks you to press **Start**, and that writes the marker.
 
 ## Using the command line
 
@@ -93,6 +131,10 @@ brew upgrade --cask grantpin
 ```
 
 Or download the new DMG and drag the app over the old one. Your vault is not touched.
+
+:::note[Upgrading from v0.2.1, v0.2.2 or v0.2.3 with Homebrew]
+The Homebrew cask of those older versions removed the background service on every upgrade. After upgrading *from* one of them, open grantpin and press **Start** once (the menu-bar icon shows a red dot until you do). Later upgrades keep the service.
+:::
 
 ## Build from source
 

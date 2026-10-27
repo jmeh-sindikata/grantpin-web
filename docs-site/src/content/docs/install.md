@@ -50,8 +50,8 @@ With Homebrew it is already on your `PATH` as `grantpin`.
 
 ### Install the command from the app (DMG)
 
-:::note[Next release, not in v0.2.1]
-The "Command line tool" section in Settings is newer than v0.2.1. You need the next release. With v0.2.1, use the alias below.
+:::note[Needs v0.2.2 or newer]
+The "Command line tool" section in Settings was added in v0.2.2. With v0.2.1, use the alias below.
 :::
 
 Open grantpin, go to **Settings**, then **General**, and find **Command line tool**. Click **Install**. It creates one symbolic link, `~/.local/bin/grantpin`, that points to the program inside the app. Nothing else is written: no `sudo`, no `/usr/local/bin`, and no edits to your shell's startup files.

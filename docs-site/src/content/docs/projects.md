@@ -90,8 +90,8 @@ grantpin import ~/projects/shop/.env --namespace shop
 
 `STRIPE_KEY` in the file becomes the secret `shop/STRIPE_KEY`. `--dry-run` prints the final names without writing anything, and `--on-conflict` (`skip`, `overwrite` or `error`, the default) is checked against those final names, so importing the same file under two namespaces never conflicts. The namespace must be a valid secret name: only `A-Z a-z 0-9 _ / . -`, not starting or ending with `/`, with no `//`, no `..` and no `.` segment. An invalid namespace is refused before the file is read.
 
-:::note[Needs a newer release]
-`--namespace` is newer than v0.2.1. You need the next release. Until then, `import` stores keys under their bare names (`STRIPE_KEY`), and you can store namespaced secrets one at a time with `grantpin set shop/STRIPE_KEY`.
+:::note[Needs v0.2.2 or newer]
+`--namespace` was added in v0.2.2. With v0.2.1, `import` stores keys under their bare names (`STRIPE_KEY`), and you can store namespaced secrets one at a time with `grantpin set shop/STRIPE_KEY`.
 :::
 
 Without `--namespace`, keys keep their bare names. An import is not atomic: if the daemon fails midway, some keys may already be stored.

@@ -167,7 +167,7 @@ Imports `KEY=value` lines from a `.env` file (`FILE` may be `-` for stdin). Hand
 | `--on-conflict MODE` | When a name already exists: `skip`, `overwrite` or `error` (default). Checked against the final names. |
 
 :::note
-`--namespace` needs a release newer than v0.2.1.
+`--namespace` needs v0.2.2 or newer.
 :::
 
 ## grantpin grants

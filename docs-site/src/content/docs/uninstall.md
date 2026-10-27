@@ -14,7 +14,7 @@ Open grantpin and go to **Settings**, then **Uninstall**. The sheet lists what i
 | Stop and remove the background service | Removes the launchd job (`dev.grantpin.daemon`). On by default. |
 | Delete my vault | Deletes all secrets, grants and the audit log. You must type `delete` to confirm. It always stops the service first. |
 | Delete logs | Deletes the daemon logs. |
-| Remove the grantpin command from `~/.local/bin` | Offered when `~/.local/bin/grantpin` is a link into this app (see [Install](/docs/install/#install-the-command-from-the-app-dmg)). Needs a release newer than v0.2.1. Only the link is removed, never a file or a link that points elsewhere. |
+| Remove the grantpin command from `~/.local/bin` | Offered when `~/.local/bin/grantpin` is a link into this app (see [Install](/docs/install/#install-the-command-from-the-app-dmg)). Needs v0.2.2 or newer. Only the link is removed, never a file or a link that points elsewhere. |
 | Delete the Keychain item / Delete the hardware key | Offered only for the matching vault type. Deleting the key makes the vault permanently unreadable, even if you keep the vault file. |
 
 When it finishes, the sheet lists what stays. Then:
@@ -81,7 +81,7 @@ Finally remove the app (`/Applications/grantpin.app`) and run `claude mcp remove
 | Item | Removed by |
 |---|---|
 | The app, `/Applications/grantpin.app` | Trash, or `brew uninstall --cask grantpin`. |
-| The `~/.local/bin/grantpin` link (DMG, newer releases) | App Uninstall (command line option), or `rm ~/.local/bin/grantpin`. |
+| The `~/.local/bin/grantpin` link (DMG, v0.2.2 or newer) | App Uninstall (command line option), or `rm ~/.local/bin/grantpin`. |
 | The background service | App Uninstall, `grantpin service uninstall`, or `brew uninstall`. |
 | The vault, `~/Library/Application Support/grantpin` | App Uninstall ("Delete my vault"), `brew uninstall --zap`, or deleting the folder. |
 | Logs, `~/Library/Logs/grantpin` | App Uninstall ("Delete logs"), `--zap`, or deleting the folder. |

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1629" />
+    <meta name="robots" content="noindex" />
+    <title>Page not found | grantpin</title>
+    <meta name="description" content="This page does not exist." />
+    <link rel="icon" href="/assets/grantpin-icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/fonts.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      /* Served by GitHub Pages for any unknown URL, so every path is absolute. */
+      .not-found {
+        min-height: calc(100vh - 111px - 90px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 18px;
+        padding-block: 64px;
+      }
+      .not-found h1 {
+        font-size: clamp(36px, 8vw, 56px);
+        line-height: 1.1;
+        font-weight: 500;
+        letter-spacing: -1.5px;
+        margin: 0;
+      }
+      .not-found p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0;
+      }
+      .not-found .hero-actions {
+        margin-top: 10px;
+      }
+      .not-found .button-secondary {
+        border: 1px solid #3a4a5f;
+        color: var(--text);
+      }
+      .not-found .button-secondary:hover {
+        color: var(--ice);
+      }
+      /* styles.css hides the first two nav links on phones; here they are the only links. */
+      @media (max-width: 480px) {
+        .site-header nav > a:nth-child(1),
+        .site-header nav > a:nth-child(2) {
+          display: inline;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell">
+      <header class="site-header wrap">
+        <a class="brand" href="/" aria-label="grantpin home"
+          ><img
+            src="/assets/grantpin-icon.svg"
+            width="39"
+            height="39"
+            alt=""
+          /><span>grantpin</span></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/docs/">Docs</a>
+        </nav>
+      </header>
+      <main id="main" class="wrap">
+        <section class="not-found" aria-labelledby="nf-title">
+          <p class="eyebrow">Error 404</p>
+          <h1 id="nf-title">Page not found</h1>
+          <p>That page does not exist, or it has moved.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/">Home</a>
+            <a class="button button-secondary" href="/docs/">Docs</a>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer wrap">
+        <a class="brand" href="/" aria-label="grantpin home"
+          ><img
+            src="/assets/grantpin-icon.svg"
+            width="28"
+            height="28"
+            alt=""
+          /><span>grantpin</span></a
+        >
+        <p>A little boundary. A better workflow.</p>
+        <a class="footer-link" href="/docs/">Docs</a>
+        <span class="footer-license">Local by design. Apache 2.0.</span>
+      </footer>
+    </div>
+  </body>
+</html>

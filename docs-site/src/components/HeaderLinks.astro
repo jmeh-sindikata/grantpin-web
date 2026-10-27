@@ -1,0 +1,22 @@
+---
+// Replaces Starlight's social icons in the header and in the mobile menu:
+// a link back to the landing page and a link to the GitHub repository.
+---
+
+<a href="/" class="header-link">Home</a>
+<a href="https://github.com/jmeh-sindikata/grantpin" class="header-link" rel="me">GitHub</a>
+
+<style>
+  @layer starlight.core {
+    .header-link {
+      color: var(--sl-color-text-accent);
+      font-weight: 500;
+      font-size: var(--sl-text-sm);
+      text-decoration: none;
+    }
+    .header-link:hover {
+      color: var(--sl-color-white);
+      text-decoration: underline;
+    }
+  }
+</style>

@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "docs-site"
+  ],
   "scripts": {
     "dev": "node server.mjs",
-    "check": "node --check dist/script.js && node --check dist/site-config.js && node --check server.mjs"
+    "check": "node --check dist/script.js && node --check dist/site-config.js && node --check server.mjs && node --check scripts/build-site.mjs",
+    "docs:dev": "npm run dev --workspace docs-site",
+    "docs:build": "npm run build --workspace docs-site",
+    "build:site": "node scripts/build-site.mjs"
   }
 }

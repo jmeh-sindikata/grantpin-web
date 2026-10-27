@@ -1,0 +1,105 @@
+/*
+ * Same navy theme as the landing page (dist/styles.css):
+ *   --navy #0b1629, --navy-raised #101e33, --ice #c7e2ff,
+ *   --text #f0f4f9, --muted #a0aec2, --line #26354a
+ * The docs are dark only. The light-theme block is repeated so nothing can
+ * switch the palette even if data-theme is changed.
+ */
+:root,
+:root[data-theme="dark"],
+:root[data-theme="light"] {
+  color-scheme: dark;
+
+  --gp-navy: #0b1629;
+  --gp-navy-raised: #101e33;
+  --gp-ice: #c7e2ff;
+  --gp-text: #f0f4f9;
+  --gp-muted: #a0aec2;
+  --gp-line: #26354a;
+
+  --sl-font: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --sl-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --sl-color-white: var(--gp-text);
+  --sl-color-gray-1: #e1e8f1;
+  --sl-color-gray-2: #c5cfdd;
+  --sl-color-gray-3: var(--gp-muted);
+  --sl-color-gray-4: #7a8aa3;
+  --sl-color-gray-5: var(--gp-line);
+  --sl-color-gray-6: var(--gp-navy-raised);
+  --sl-color-gray-7: var(--gp-navy-raised);
+  --sl-color-black: var(--gp-navy);
+
+  --sl-color-accent-low: #15335a;
+  --sl-color-accent: #6fb0ee;
+  --sl-color-accent-high: var(--gp-ice);
+
+  --sl-color-text: #d4dce8;
+  --sl-color-text-accent: var(--gp-ice);
+  --sl-color-text-invert: var(--gp-navy);
+  --sl-color-bg: var(--gp-navy);
+  --sl-color-bg-nav: var(--gp-navy);
+  --sl-color-bg-sidebar: var(--gp-navy);
+  --sl-color-bg-inline-code: var(--gp-navy-raised);
+  --sl-color-bg-accent: var(--gp-ice);
+  --sl-color-hairline-light: var(--gp-line);
+  --sl-color-hairline: var(--gp-line);
+  --sl-color-hairline-shade: var(--gp-line);
+  --sl-color-backdrop-overlay: rgba(5, 10, 20, 0.7);
+
+  font-synthesis: none;
+}
+
+body {
+  background: var(--gp-navy);
+}
+
+::selection {
+  background: var(--gp-ice);
+  color: var(--gp-navy);
+}
+
+/* Links in prose: ice, underlined so they do not rely on colour alone. */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--gp-ice);
+  text-decoration-color: rgba(199, 226, 255, 0.5);
+  text-underline-offset: 0.18em;
+}
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+  text-decoration-color: var(--gp-ice);
+}
+
+/* Inline code gets the raised surface and a hairline, like the landing page. */
+.sl-markdown-content :not(pre) > code {
+  border: 1px solid var(--gp-line);
+  border-radius: 4px;
+  padding: 0.08em 0.35em;
+  color: var(--gp-text);
+}
+
+/* Tables: header row on the raised surface. */
+.sl-markdown-content table {
+  display: block;
+  overflow-x: auto;
+}
+.sl-markdown-content th {
+  background: var(--gp-navy-raised);
+  color: var(--gp-text);
+}
+.sl-markdown-content :is(th, td) {
+  border-color: var(--gp-line);
+}
+
+/* Sidebar and header separators use the landing page line colour. */
+.sidebar-pane,
+header.header {
+  border-color: var(--gp-line);
+}
+
+.status-note {
+  margin-block: 1.5rem;
+}
+
+:focus-visible {
+  outline-color: var(--gp-ice);
+}

@@ -1,0 +1,10 @@
+---
+// The landing page is dark only, so the docs are too. This replaces Starlight's
+// ThemeProvider, which would otherwise read a stored light/dark preference or
+// the operating system setting. There is no theme selector either (see Empty.astro).
+---
+
+<script is:inline>
+  document.documentElement.dataset.theme = "dark";
+  window.StarlightThemeProvider = { updatePickers() {} };
+</script>

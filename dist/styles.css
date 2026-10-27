@@ -812,10 +812,14 @@ summary:focus-visible {
   letter-spacing: -0.7px;
 }
 .site-footer p,
-.footer-license {
+.footer-license,
+.footer-link {
   font-size: 11px;
   color: #8397b2;
   margin: 0;
+}
+.footer-link:hover {
+  color: var(--ice);
 }
 dialog {
   width: min(430px, calc(100% - 40px));
@@ -1101,6 +1105,7 @@ dialog .button {
   .site-header nav {
     gap: 18px;
   }
+  .site-header nav > a:nth-child(1),
   .site-header nav > a:nth-child(2) {
     display: none;
   }

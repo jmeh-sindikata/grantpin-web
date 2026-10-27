@@ -103,3 +103,53 @@ header.header {
 :focus-visible {
   outline-color: var(--gp-ice);
 }
+
+/* Phone and tablet: tap targets of at least 40px for header, menu, sidebar and page links.
+   Starlight switches to its mobile layout below 50rem. */
+@media (max-width: 49.99rem) {
+  .header-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 0.25rem;
+  }
+  .site-title {
+    min-height: 40px;
+  }
+  site-search button,
+  .sl-menu-button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .sidebar-content a {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+  }
+  mobile-starlight-toc nav a,
+  mobile-starlight-toc summary {
+    min-height: 40px;
+  }
+  .expressive-code .copy button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  footer .meta a,
+  .pagination-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+}
+
+/* Links under the cards on the docs home page. On a phone the header has no room
+   for Home and GitHub (they live in the menu, which the home page does not have). */
+.splash-links {
+  margin-top: 1.5rem;
+}
+.splash-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding-inline: 0.25rem;
+}

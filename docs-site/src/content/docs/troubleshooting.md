@@ -15,7 +15,7 @@ A **denied** result (exit 77) means nobody approved it. A **refused** result (ex
 | `denied (approver_unavailable)` (exit 77) | The prompt could not be shown: no desktop session (the daemon was started over SSH, for example), no device password set, or the dialog failed. It never turns into an allow. Start the daemon from the background service in your login session. |
 | `refused (policy_refused)` (exit 78) | The project's `.grantpin.yml` does not allow the secret or the command, or the file is unreadable, invalid, not owned by you, or world-writable. The message names the item. See [Policy files](/docs/policy/). |
 | `refused (tier_unmet)` (exit 78) | A secret needs a protection level your key store or approver does not provide. Levels are never downgraded. See [Presence tiers](/docs/grants/#presence-tiers). |
-| `refused (secret_expired)` (exit 78) | A secret is past its expiry. Give it a new one with `grantpin update NAME --expires 30d` or remove the expiry with `--clear-expires`. |
+| `refused (secret_expired)` (exit 78) | A secret is past its expiry. `grantpin update` works on an expired secret: give it a new expiry with `grantpin update NAME --expires 30d`, or remove the expiry with `grantpin update NAME --clear-expires`. |
 | `show` refuses (exit 78) | `grantpin show` only prints to a terminal. |
 
 ## Daemon and vault

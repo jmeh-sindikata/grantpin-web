@@ -9,7 +9,7 @@ All commands that talk to the background daemon accept `--socket PATH` (default:
 grantpin [command]
 ```
 
-Global flags: `-h, --help` and `-v, --version`. `grantpin completion` (bash, zsh, fish, powershell) is the standard shell-completion generator.
+Global flags: `-h, --help` and `-v, --version`. `grantpin help` and `grantpin completion` (bash, zsh, fish, powershell; the standard shell-completion generator) are also available.
 
 | Command | Purpose |
 |---|---|
@@ -153,12 +153,22 @@ Variable names come from the last path segment of the secret, uppercased, with `
 grantpin import FILE [flags]
 ```
 
-Imports `KEY=value` lines from a `.env` file (`FILE` may be `-` for stdin). Handles an `export` prefix, quotes and `#` comments; there is no `${VAR}` expansion. Keys must match `[A-Za-z_][A-Za-z0-9_]*`. Empty values are skipped, and for duplicate keys the last wins. Names are checked before anything is written, but a daemon error midway can leave a partial import.
+```sh
+grantpin import .env
+grantpin import .env --namespace shop --dry-run
+```
+
+Imports `KEY=value` lines from a `.env` file (`FILE` may be `-` for stdin). Handles an `export` prefix, quotes and `#` comments; there is no `${VAR}` expansion. Keys must match `[A-Za-z_][A-Za-z0-9_]*`. Empty values are skipped, and for duplicate keys the last wins. Each key becomes a secret with default metadata. Names are checked before anything is written, but a daemon error midway can leave a partial import.
 
 | Flag | Meaning |
 |---|---|
-| `--dry-run` | Show what would be imported without writing. |
-| `--on-conflict MODE` | When a name already exists: `skip`, `overwrite` or `error` (default). |
+| `--dry-run` | Show what would be imported without writing. It prints the final names. |
+| `--namespace NAME` | Store each key as `NAME/KEY` (`--namespace shop` turns `STRIPE_KEY` into `shop/STRIPE_KEY`). `NAME` may use `A-Z a-z 0-9 _ / . -`, must not start or end with `/`, and must not contain `//`, `..` or a `.` segment. `NAME/KEY` must be a valid secret name (at most 256 bytes). An invalid `NAME` is refused before the file is read. Without the flag, keys keep their bare names. |
+| `--on-conflict MODE` | When a name already exists: `skip`, `overwrite` or `error` (default). Checked against the final names. |
+
+:::note
+`--namespace` needs a release newer than v0.2.1.
+:::
 
 ## grantpin grants
 
@@ -253,12 +263,12 @@ Runs the stdio MCP server. See [Claude Code and MCP](/docs/claude-code/).
 grantpin keystore delete (--fallback | --hardware) --yes [--force]
 ```
 
-Deletes the key material that protects the vault, for uninstalling. **Afterwards the vault can never be opened again and its secrets cannot be recovered.**
+Deletes the key material that protects the vault, for uninstalling. **Afterwards the vault file can never be opened again, and nothing can recover its secrets.** Nothing is printed on stdout.
 
 | Flag | Meaning |
 |---|---|
 | `--fallback` | Delete the Keychain item of a vault created with `init --keychain-fallback`. |
-| `--hardware` | Delete the Secure Enclave key. |
+| `--hardware` | Delete the Secure Enclave key reference. |
 | `--yes` | Required. There is no other prompt. |
 | `--force` | Delete even if the daemon is running. Without it the command refuses while a daemon answers; stop the service first. |
 

@@ -46,7 +46,37 @@ The `grantpin` command-line tool is inside the app bundle:
 /Applications/grantpin.app/Contents/Helpers/grantpin-daemon.app/Contents/MacOS/grantpin
 ```
 
-With Homebrew it is already on your `PATH` as `grantpin`. With the DMG you can call it by its full path, or add an alias to your shell profile:
+With Homebrew it is already on your `PATH` as `grantpin`.
+
+### Install the command from the app (DMG)
+
+:::note[Next release, not in v0.2.1]
+The "Command line tool" section in Settings is newer than v0.2.1. You need the next release. With v0.2.1, use the alias below.
+:::
+
+Open grantpin, go to **Settings**, then **General**, and find **Command line tool**. Click **Install**. It creates one symbolic link, `~/.local/bin/grantpin`, that points to the program inside the app. Nothing else is written: no `sudo`, no `/usr/local/bin`, and no edits to your shell's startup files.
+
+- It never overwrites anything. If `~/.local/bin/grantpin` already exists as a file, or as a link to somewhere else, grantpin leaves it alone and tells you what is in the way.
+- If `~/.local/bin` is not on your `PATH`, Settings shows the line to add. For zsh or bash, add it to your shell's startup file (for zsh, `~/.zshrc`) and open a new Terminal window:
+
+  ```sh
+  export PATH="$HOME/.local/bin:$PATH"
+  ```
+
+  For fish, run this once:
+
+  ```sh
+  fish_add_path ~/.local/bin
+  ```
+
+- The app has to be in the Applications folder, otherwise the link would point to a temporary location.
+- The Uninstall sheet offers to remove the link again. See [Uninstall](/docs/uninstall/).
+
+Homebrew users do not need this. The cask already links the command.
+
+### Or use an alias
+
+If you would rather not install the link (or you are on v0.2.1), call the program by its full path, or add an alias to your shell profile:
 
 ```sh
 alias grantpin='/Applications/grantpin.app/Contents/Helpers/grantpin-daemon.app/Contents/MacOS/grantpin'

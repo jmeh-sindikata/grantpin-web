@@ -22,7 +22,7 @@ A **denied** result (exit 77) means nobody approved it. A **refused** result (ex
 
 | You see | Meaning and fix |
 |---|---|
-| `grantpin daemon is not running` (exit 69) | Nothing is listening on the socket. Open the grantpin app, or run `grantpin service install`, or run `grantpin daemon` in a spare terminal. |
+| `grantpin daemon is not running` (exit 69) | Nothing is listening on the socket. Open the grantpin app and press **Start**, or run `grantpin service install`, or run `grantpin daemon` in a spare terminal. See [The background service](/docs/install/#the-background-service). |
 | `vault not initialized; run grantpin init` | The daemon is up but there is no vault yet. Create it in the app, or run `grantpin init`. No restart is needed. |
 | `vault_locked`, or `grantpin status` shows `vault: locked (retrying ...)` | The Secure Enclave key can only be used while your Mac is unlocked, and macOS refuses it on a locked screen or right after login. The daemon keeps retrying, so unlock the Mac and the next request works. Nothing needs restarting. For a moment after the daemon starts you may see `vault is being opened`. If it stays locked while you are logged in, read the last error in `grantpin status`. |
 | `init` fails with a Secure Enclave error (`-34018`) | This build or Mac cannot create a Secure Enclave key (a from-source build, a virtual machine, a Mac without a Secure Enclave). Use `grantpin init --keychain-fallback`. No flag is needed afterwards. |
@@ -50,10 +50,13 @@ A **denied** result (exit 77) means nobody approved it. A **refused** result (ex
 - Already connected with an older path? Run `claude mcp remove grantpin`, then add it again.
 - See [Claude Code and MCP](/docs/claude-code/).
 
-## The service
+## The background service and the app
 
 | You see | Meaning and fix |
 |---|---|
+| "grantpin is not set up to run in the background" (the menu-bar popover or a small window, with the icon dimmed and a red dot) | The background service is not installed: you never installed it, or it was removed. Press **Start**. That installs and starts it. See [The background service](/docs/install/#the-background-service). |
+| "grantpin's background service is stopped" | The service is installed but not running. Press **Start** (or **Restart**), and open the logs folder (`~/Library/Logs/grantpin/`) if it happens again. From v0.2.4 the app may already have restored it for you. See [Automatic restore](/docs/install/#automatic-restore). |
+| The service vanished after `brew upgrade` | The Homebrew cask of v0.2.1, v0.2.2 and v0.2.3 removed the background service when upgrading *from* those versions. Press **Start** once. Later upgrades keep it. See [Updating](/docs/install/#updating). |
 | `service install` refuses the binary | It will not install a binary from a temporary directory. Put grantpin in a permanent location first. |
 | `grantpin service status` exits 3 | The service is not installed. |
 | Something changed after moving or updating the app | Run `grantpin service install` again. It is safe to repeat. |

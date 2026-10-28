@@ -185,3 +185,61 @@ header.header {
     letter-spacing: -0.9px;
   }
 }
+
+/*
+ * Wide screens: keep the text next to the sidebar.
+ * Starlight splits all free width between a left gutter (the main pane grows by half of
+ * it) and a wider right column, which centres the 45rem text column. Cap that gutter at
+ * the value it has at 90rem (1440px), so the layout is identical up to 1440px and the
+ * text stays at the same spot (right beside the nav) on larger screens. The right
+ * column stops growing too, so "On this page" stays pinned to the right edge.
+ * Starlight's own rules sit in a cascade layer, so these unlayered rules win.
+ */
+:root {
+  --gp-gutter-max: calc((90rem - 2 * var(--sl-sidebar-width) - var(--sl-content-width)) / 2);
+}
+/* Same breakpoint as Starlight's three column layout; below it nothing changes. */
+@media (min-width: 72rem) {
+  .right-sidebar-container {
+    width: max(
+      var(--sl-sidebar-width),
+      calc(
+        var(--sl-sidebar-width) +
+          min(var(--gp-gutter-max), (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2)
+      )
+    );
+  }
+  [data-has-sidebar][data-has-toc] .main-pane {
+    width: min(
+      calc(100% - var(--sl-sidebar-width)),
+      calc(
+        var(--sl-content-width) +
+          min(var(--gp-gutter-max), (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2)
+      )
+    );
+  }
+}
+/* Above 90rem the two columns together are narrower than the page: put "On this page"
+   right after the text column (its left border becomes the column divider) so the
+   empty space ends up at the far right edge. Up to 90rem the columns fill the row, so
+   this changes nothing there. */
+@media (min-width: 90rem) {
+  .right-sidebar-container {
+    margin-inline-start: 0;
+  }
+}
+/* The header search box lines up with the text column; cap its offset the same way. */
+@media (min-width: 90rem) {
+  header.header > .header {
+    grid-template-columns:
+      minmax(
+        calc(
+          var(--__sidebar-width) +
+            max(0rem, var(--__main-column-fr) - max(0rem, (100% + 2 * var(--sl-nav-pad-x) - 90rem) / 2) - var(--sl-nav-gap))
+        ),
+        auto
+      )
+      1fr
+      auto;
+  }
+}

@@ -219,6 +219,15 @@ header.header {
     );
   }
 }
+/* Above 90rem the two columns together are narrower than the page: put "On this page"
+   right after the text column (its left border becomes the column divider) so the
+   empty space ends up at the far right edge. Up to 90rem the columns fill the row, so
+   this changes nothing there. */
+@media (min-width: 90rem) {
+  .right-sidebar-container {
+    margin-inline-start: 0;
+  }
+}
 /* The header search box lines up with the text column; cap its offset the same way. */
 @media (min-width: 90rem) {
   header.header > .header {

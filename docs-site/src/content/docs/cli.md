@@ -222,6 +222,10 @@ grantpin status
 
 Shows the daemon's PID, version, socket and uptime, whether a vault exists, the key store and approver tiers, and the number of secrets and active grants. It prints a `WARNING:` line if any grant failed its integrity check. It works without a vault, and exits 69 if the daemon is not running.
 
+:::note[Needs v0.2.5 or newer]
+`status` also prints a line `runs: N in flight`, the number of requests the daemon has accepted and not answered yet that use or may ask for an approval (`run`, `show`, creating a standing grant, and `update` when it lowers a secret's protection). One waiting on the approval dialog counts. The app uses this number to decide whether it can restart the service after an update (see [Restart after an update](/docs/install/#restart-after-an-update)). Against a daemon older than v0.2.5 the line reads `runs: unknown (daemon predates 0.2.5)`.
+:::
+
 ## grantpin daemon
 
 ```sh

@@ -26,14 +26,26 @@
     });
   }
 
-  const request = document.getElementById("approval-card");
+  const demo = document.querySelector(".run-demo");
+  const stage = document.getElementById("mac-stage");
+  const dialog = document.getElementById("demo-dialog");
+  const touchSheet = document.getElementById("demo-touchid");
+  const stepLabel = document.getElementById("mac-step-label");
+  const touchNote = document.getElementById("touch-note");
+  const touchNoteDefault = touchNote.textContent;
   const result = document.getElementById("demo-result");
   const reset = document.getElementById("demo-reset");
   const allow = document.getElementById("demo-allow");
   const allowHour = document.getElementById("demo-allow-hour");
   const deny = document.getElementById("demo-deny");
+  const touch = document.getElementById("demo-touch");
+  const touchCancel = document.getElementById("demo-touch-cancel");
+  const touchPassword = document.getElementById("demo-touch-password");
   const announcement = document.getElementById("demo-announcement");
-  function choose(allowed) {
+  // "dialog" (macOS alert) -> "touch" (Touch ID sheet) -> "result"
+  let step = "dialog";
+  function finish(allowed) {
+    step = "result";
     document.getElementById("result-title").textContent = allowed
       ? "Permission granted."
       : "Your no means no.";
@@ -50,21 +62,59 @@
     document.getElementById("result-output").textContent = allowed
       ? "API_KEY=[REDACTED:API_KEY]"
       : "denied: user_denied";
-    request.hidden = true;
+    stage.hidden = true;
     result.hidden = false;
-    announcement.textContent = allowed
-      ? "Example only: approval and authentication succeeded. The command ran, its output was redacted, and the decision was audited."
-      : "Example only: command denied. The command did not run, and the decision was audited.";
     reset.focus({ preventScroll: true });
   }
-  allow.addEventListener("click", () => choose(true));
-  allowHour.addEventListener("click", () => choose(true));
-  deny.addEventListener("click", () => choose(false));
-  reset.addEventListener("click", () => {
-    result.hidden = true;
-    request.hidden = false;
+  function showTouch(label) {
+    step = "touch";
+    dialog.hidden = true;
+    touchSheet.hidden = false;
+    stepLabel.textContent = "2 / 2 · Touch ID";
+    touchNote.textContent = touchNoteDefault;
+    announcement.textContent = `Example only: you chose ${label}. The system Touch ID sheet is next. Touch the simulated sensor to continue, or choose Cancel.`;
+    touch.focus({ preventScroll: true });
+  }
+  function denyAtDialog() {
+    finish(false);
     announcement.textContent =
-      "Example reset. Review the command and choose Allow once, Allow for 1h, or Deny.";
-    allow.focus({ preventScroll: true });
+      "Example only: command denied. Touch ID was never requested, the command did not run, and the decision was audited.";
+  }
+  function cancelTouch() {
+    finish(false);
+    announcement.textContent =
+      "Example only: Touch ID cancelled. The command did not run, and the decision was audited.";
+  }
+  allow.addEventListener("click", () => showTouch("Allow once"));
+  allowHour.addEventListener("click", () => showTouch("Allow for 1h"));
+  deny.addEventListener("click", denyAtDialog);
+  touch.addEventListener("click", () => {
+    finish(true);
+    announcement.textContent =
+      "Example only: approval and Touch ID succeeded. The command ran, its output was redacted, and the decision was audited.";
+  });
+  touchCancel.addEventListener("click", cancelTouch);
+  touchPassword.addEventListener("click", () => {
+    touchNote.textContent =
+      "Simulation: password entry is not part of this example. Click the fingerprint or choose Cancel.";
+    announcement.textContent = touchNote.textContent;
+    touch.focus({ preventScroll: true });
+  });
+  // Escape is Deny in the dialog and Cancel in the Touch ID sheet.
+  demo.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (step === "dialog") denyAtDialog();
+    else if (step === "touch") cancelTouch();
+  });
+  reset.addEventListener("click", () => {
+    step = "dialog";
+    result.hidden = true;
+    touchSheet.hidden = true;
+    dialog.hidden = false;
+    stage.hidden = false;
+    stepLabel.textContent = "1 / 2 · macOS dialog";
+    announcement.textContent =
+      "Example reset. A macOS dialog shows the command. Choose Deny, Allow once, or Allow for 1h.";
+    deny.focus({ preventScroll: true });
   });
 })();

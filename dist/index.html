@@ -99,7 +99,7 @@
             </div>
             <div
               class="run-demo"
-              aria-label="Illustrated example of a grantpin approval"
+              aria-label="Illustrated example of a grantpin approval: a macOS dialog, then Touch ID"
             >
               <div class="terminal-bar">
                 <div class="traffic-lights" aria-hidden="true">
@@ -125,69 +125,110 @@
                   <path d="M10 2v14m-4-4 4 4 4-4" /></svg
                 ><span></span>
               </div>
-              <div class="approval-card" id="approval-card">
-                <div class="approval-heading">
-                  <img
-                    src="./assets/grantpin-icon.svg"
-                    width="37"
-                    height="37"
-                    alt=""
-                  />
-                  <div>
-                    <span class="approval-app">grantpin</span
-                    ><span class="approval-subtitle"
-                      >This command needs your permission.</span
+              <div class="mac-stage" id="mac-stage">
+                <div class="mac-step" aria-hidden="true">
+                  <span id="mac-step-label">1 / 2 · macOS dialog</span
+                  ><span>illustration</span>
+                </div>
+                <div
+                  class="mac-dialog"
+                  id="demo-dialog"
+                  role="group"
+                  aria-labelledby="dialog-title"
+                  aria-describedby="dialog-body"
+                >
+                  <div class="mac-icon" aria-hidden="true">
+                    <img
+                      src="./assets/grantpin-icon.svg"
+                      width="52"
+                      height="52"
+                      alt=""
+                    />
+                    <svg viewBox="0 0 28 28">
+                      <path
+                        d="M14 2.6c.8 0 1.5.4 1.9 1.1l10.2 17.6c.8 1.4-.2 3.1-1.9 3.1H3.8c-1.6 0-2.7-1.7-1.9-3.1L12.1 3.7c.4-.7 1.1-1.1 1.9-1.1Z"
+                        fill="#f7c325"
+                        stroke="#b9860a"
+                        stroke-width="1"
+                      />
+                      <path
+                        d="M14 9.5v6.2"
+                        stroke="#3a2a00"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="14" cy="19.4" r="1.4" fill="#3a2a00" />
+                    </svg>
+                  </div>
+                  <div class="mac-content">
+                    <p class="mac-title" id="dialog-title">grantpin</p>
+                    <div class="mac-body" id="dialog-body">
+                      <p>An agent is asking grantpin to release secrets:</p>
+                      <p>
+                        Claude Code wants to run `./deploy.sh` with API_KEY in
+                        /Users/you/your-project
+                      </p>
+                      <p>
+                        Allow for 1h covers: ./deploy.sh … in
+                        /Users/you/your-project and subfolders.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mac-buttons">
+                    <button
+                      type="button"
+                      class="mac-default"
+                      id="demo-deny"
+                      aria-label="Deny the example command"
                     >
+                      Deny</button
+                    ><button
+                      type="button"
+                      id="demo-allow"
+                      aria-label="Allow the example command once"
+                    >
+                      Allow once</button
+                    ><button
+                      type="button"
+                      id="demo-allow-hour"
+                      aria-label="Allow the example command for 1 hour"
+                    >
+                      Allow for 1h
+                    </button>
                   </div>
                 </div>
-                <dl class="request-details">
-                  <div>
-                    <dt>Command</dt>
-                    <dd><code>./deploy.sh</code></dd>
-                  </div>
-                  <div>
-                    <dt>Secret</dt>
-                    <dd>
-                      <code>API_KEY</code
-                      ><span class="value-hidden">value stays hidden</span>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>Project</dt>
-                    <dd><code>~/your-project</code></dd>
-                  </div>
-                </dl>
-                <div class="presence-line">
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path
-                      d="M8 13v-2a4 4 0 0 1 8 0v3m-11 0v-3a7 7 0 0 1 14 0v3c0 2-.4 4-1.2 6M9 19c1-1.8 1-4 1-7a2 2 0 0 1 4 0v3c0 2-.3 4-1 6M5 18c1-2 1-4 1-6M8 4a9 9 0 0 1 12 3"
-                    /></svg
-                  ><span>Approval is followed by Touch ID.</span>
-                </div>
-                <div class="approval-actions">
+                <div
+                  class="mac-touchid"
+                  id="demo-touchid"
+                  role="group"
+                  aria-labelledby="touch-reason"
+                  hidden
+                >
                   <button
                     type="button"
-                    class="deny-button"
-                    id="demo-deny"
-                    aria-label="Deny the example command"
+                    class="mac-finger"
+                    id="demo-touch"
+                    aria-label="Touch sensor (simulation). Activate to simulate a Touch ID scan."
                   >
-                    Deny</button
-                  ><button
-                    type="button"
-                    class="allow-button"
-                    id="demo-allow"
-                    aria-label="Allow the example command once"
-                  >
-                    Allow once <span aria-hidden="true">↗</span>
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path
+                        d="M8 13v-2a4 4 0 0 1 8 0v3m-11 0v-3a7 7 0 0 1 14 0v3c0 2-.4 4-1.2 6M9 19c1-1.8 1-4 1-7a2 2 0 0 1 4 0v3c0 2-.3 4-1 6M5 18c1-2 1-4 1-6M8 4a9 9 0 0 1 12 3"
+                      />
+                    </svg>
                   </button>
-                  <button
-                    type="button"
-                    class="allow-button"
-                    id="demo-allow-hour"
-                    aria-label="Allow the example command for 1 hour"
-                  >
-                    Allow for 1h
-                  </button>
+                  <p class="mac-touch-reason" id="touch-reason">
+                    Claude Code wants to run ./deploy.sh with API_KEY in
+                    /Users/you/your-project
+                  </p>
+                  <p class="mac-sim" id="touch-note">
+                    Simulation: click the fingerprint to touch the sensor.
+                  </p>
+                  <div class="mac-buttons">
+                    <button type="button" id="demo-touch-cancel">Cancel</button
+                    ><button type="button" id="demo-touch-password">
+                      Use Password…
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="demo-result" id="demo-result" hidden>
@@ -242,8 +283,9 @@
             <span class="section-index mono">02 / CONTROL</span>
             <h2>Permission, on your terms.</h2>
             <p>
-              Review the command and approve with Touch ID. Allow a single run
-              or create a grant with a scope you choose.
+              A dialog shows the exact command and the secrets it would get, and
+              Touch ID confirms. Allow a single run or create a grant with a
+              scope you choose.
             </p>
           </article>
           <article>
@@ -302,8 +344,9 @@
               <div>
                 <h3>Review. Approve. Keep building.</h3>
                 <p>
-                  See the command, project, and requested keys. After approval,
-                  grantpin runs the command and returns redacted output.
+                  A dialog shows the exact command and the secrets it would get, and
+                  Touch ID confirms. After approval, grantpin runs the command
+                  and returns redacted output.
                 </p>
                 <span class="step-detail mono"
                   >Your approval. An audited result.</span

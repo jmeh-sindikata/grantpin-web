@@ -383,7 +383,7 @@ summary:focus-visible {
   --mac-accent: #0a64f0;
   --mac-accent-fg: #ffffff;
   --mac-focus: #0a64f0;
-  --mac-finger: #e5484d;
+  --mac-touchid: #ff3b30;
   --mac-shadow: 0 0 0 0.5px #00000040, 0 18px 40px #00000050;
   --mac-desk: #16263d;
   position: relative;
@@ -411,7 +411,7 @@ summary:focus-visible {
     --mac-btn-line: #ffffff1f;
     --mac-accent: #0a84ff;
     --mac-focus: #64a8ff;
-    --mac-finger: #ff6b6f;
+    --mac-touchid: #ff453a;
     --mac-shadow: 0 0 0 0.5px #ffffff30, 0 18px 40px #000000a0;
   }
 }
@@ -535,26 +535,25 @@ summary:focus-visible {
 .mac-stage .mac-finger {
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   padding: 0;
-  border-radius: 50%;
-  border: 1px solid var(--mac-line);
+  border: 0;
+  border-radius: 14px;
   background: transparent;
   box-shadow: none;
-  color: var(--mac-finger);
+  color: var(--mac-touchid);
 }
 .mac-stage .mac-finger:hover {
-  background: color-mix(in srgb, var(--mac-finger) 12%, transparent);
+  background: color-mix(in srgb, var(--mac-touchid) 10%, transparent);
+}
+.mac-stage .mac-finger:active {
+  background: color-mix(in srgb, var(--mac-touchid) 18%, transparent);
 }
 .mac-finger svg {
-  width: 38px;
-  height: 38px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  display: block;
+  width: 60px;
+  height: 60px;
 }
 .mac-touch-reason {
   margin: 14px 0 0;
@@ -1287,6 +1286,15 @@ dialog .button {
   }
   .mac-stage button {
     min-height: 36px;
+  }
+  .mac-stage .mac-finger {
+    width: 64px;
+    height: 64px;
+    min-height: 0;
+  }
+  .mac-finger svg {
+    width: 52px;
+    height: 52px;
   }
   .demo-footer {
     font-size: 8px;
